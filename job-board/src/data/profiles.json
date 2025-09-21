@@ -5,7 +5,7 @@
         "username": "alicej",
         "role": "user",
         "bio": "Lover of nature and photography.",
-        "avatarUrl": "/avatars/alice.jpg"
+        "avatarUrl": "data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='40' fill='%23a7f3d0'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-size='32' fill='%2334d399' font-family='Arial' dy='.3em'%3EAJ%3C/text%3E%3C/svg%3E"
     },
     {
         "userId": 102,
@@ -13,7 +13,7 @@
         "username": "bobsmith",
         "role": "user",
         "bio": "Tech enthusiast and blogger.",
-        "avatarUrl": "/avatars/bob.jpg"
+        "avatarUrl": "data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='40' fill='%23fef08a'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-size='32' fill='%23eab308' font-family='Arial' dy='.3em'%3EBS%3C/text%3E%3C/svg%3E"
     },
     {
         "userId": 103,
@@ -21,7 +21,7 @@
         "username": "charlieb",
         "role": "user",
         "bio": "Foodie and travel addict.",
-        "avatarUrl": "/avatars/charlie.jpg"
+        "avatarUrl": "data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='40' fill='%23fca5a5'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-size='32' fill='%23ef4444' font-family='Arial' dy='.3em'%3ECB%3C/text%3E%3C/svg%3E"
     },
     {
         "userId": 104,
@@ -29,6 +29,6 @@
         "username": "dianap",
         "role": "admin",
         "bio": "Fitness coach and wellness advocate.",
-        "avatarUrl": "/avatars/diana.jpg"
+        "avatarUrl": "data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='40' fill='%239ca3af'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-size='32' fill='%236b7280' font-family='Arial' dy='.3em'%3EDP%3C/text%3E%3C/svg%3E"
     }
 ]

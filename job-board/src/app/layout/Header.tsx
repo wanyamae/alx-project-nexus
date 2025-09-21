@@ -1,6 +1,8 @@
 "use client";
+
 import React from "react";
 import { useAuth } from "../../context/AuthContext";
+import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 // Navigation links
@@ -11,26 +13,46 @@ const navLinks = [
   { name: "Profile", href: "/profile" },
 ]
 
+
 export default function Header() {
   const { user, isAuthenticated, logout } = useAuth();
-  console.log(user?.role);
   const router = useRouter();
-  const handleLogout = () => {
-	logout();
-	router.push("/login");
+  const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
+  // Map pathnames to page titles
+  const pageTitles: Record<string, string> = {
+    "/": "Home",
+    "/search": "Job Search",
+    "/my-jobs": "Saved Jobs",
+    "/profile": "Profile",
+    "/login": "Login",
+    "/applications": "Applications",
   };
-  const [ isMobileMenuOpen, setIsMobileMenuOpen ] = React.useState(false);
+  // For dynamic routes like /applications/[id]
+  let pageTitle = pageTitles[pathname] || "";
+  if (!pageTitle && pathname.startsWith("/applications/")) {
+    pageTitle = "Application Details";
+  }
+
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
 
   const toggleMobileMenu = () => {
-	setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-md border-b border-gray-200">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <span className="text-xl font-bold text-blue-600">Job Board</span>
+          {pageTitle && (
+            <span className="text-lg font-semibold text-gray-500">/ {pageTitle}</span>
+          )}
         </div>
         {/* Navigation */}
         {isAuthenticated && (

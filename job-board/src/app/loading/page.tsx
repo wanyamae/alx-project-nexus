@@ -8,7 +8,7 @@ export default function Loading() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-        router.push("/");
+        router.push("/profile");
     }, 2000);
 
     return () => clearTimeout(timer);

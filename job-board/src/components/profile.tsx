@@ -44,18 +44,18 @@ export default function Profile() {
     return (
         <div className="min-h-screen w-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-400">
             {/* Add top padding to prevent overlap with header (adjust as needed) */}
-            <div className="pt-24 pb-16 flex gap-8 max-w-6xl mx-auto">
-                <div className="w-1/4">
-                    <div className="bg-white/90 rounded-2xl shadow-lg p-6">
+            <div className="pt-24 pb-16 flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
+                <div className="w-full md:w-1/4">
+                    <div className="bg-white/90 rounded-2xl shadow-lg p-6 mb-4 md:mb-0">
                         <ProfileBasicInfo profile={profile} />
                     </div>
                 </div>
-                <div className="w-2/4">
-                    <div className="bg-white/90 rounded-2xl shadow-lg p-6">
+                <div className="w-full md:w-2/4">
+                    <div className="bg-white/90 rounded-2xl shadow-lg p-6 mb-4 md:mb-0">
                         <ProfileEditableFields profile={profile} />
                     </div>
                 </div>
-                <div className="w-1/4">
+                <div className="w-full md:w-1/4">
                     <div className="bg-white/90 rounded-2xl shadow-lg p-6">
                         <ProfileApplications applications={userApplications} />
                     </div>
