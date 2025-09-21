@@ -1,0 +1,26 @@
+[
+    { 
+        "userId": 101,
+        "username": "user",
+        "password": "user",
+        "role": "user"
+    },
+    {
+        "userId": 102,
+        "username": "admin",
+        "password": "!qaz",
+        "role": "admin"
+    },
+    {
+        "userId": 103,
+        "username": "guest",
+        "password": "guest",
+        "role": "guest"
+    },
+    {
+        "userId": 104,
+        "username": "superuser",
+        "password": "superuser",
+        "role": "superuser"
+    }
+]

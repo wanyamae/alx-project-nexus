@@ -1,0 +1,26 @@
+[
+    { 
+        "userId": 101 ,
+        "name":"Alice Johnson",
+        "bio":"Lover of nature and photography.",
+        "avatarUrl":"/avatars/alice.jpg"
+    },
+    { 
+        "userId": 102 ,
+        "name":"Bob Smith",
+        "bio":"Tech enthusiast and blogger.",
+        "avatarUrl":"/avatars/bob.jpg"
+    },
+    { 
+        "userId": 103 ,
+        "name":"Charlie Brown",
+        "bio":"Foodie and travel addict.",
+        "avatarUrl":"/avatars/charlie.jpg"
+    },
+    { 
+        "userId": 104 ,
+        "name":"Diana Prince",
+        "bio":"Fitness coach and wellness advocate.",
+        "avatarUrl":"/avatars/diana.jpg"
+    }
+]
