@@ -1,0 +1,34 @@
+[
+    {
+        "applicationId": 1,
+        "applicantId": 101,
+        "jobTitle": "Frontend Developer",
+        "jobId": 2,
+        "status": "Applied",
+        "appliedAt": "2023-10-01T10:00:00Z"
+    },
+    {
+        "applicationId": 2,
+        "applicantId": 102,
+        "jobTitle": "Backend Developer",
+        "jobId": 1,
+        "status": "Interviewing",
+        "appliedAt": "2023-10-02T11:30:00Z"
+    },
+    {
+        "applicationId": 3,
+        "applicantId": 103,
+        "jobTitle": "Full Stack Engineer",
+        "jobId": 3,
+        "status": "Offered",
+        "appliedAt": "2023-10-03T09:15:00Z"
+    },
+    {
+        "applicationId": 3,
+        "applicantId": 102,
+        "jobTitle": "Full Stack Engineer",
+        "jobId": 3,
+        "status": "Offered",
+        "appliedAt": "2023-10-03T09:15:00Z"
+    }
+]

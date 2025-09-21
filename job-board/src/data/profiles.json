@@ -1,0 +1,34 @@
+[
+    {
+        "userId": 101,
+        "name": "Alice Johnson",
+        "username": "alicej",
+        "role": "user",
+        "bio": "Lover of nature and photography.",
+        "avatarUrl": "/avatars/alice.jpg"
+    },
+    {
+        "userId": 102,
+        "name": "Bob Smith",
+        "username": "bobsmith",
+        "role": "user",
+        "bio": "Tech enthusiast and blogger.",
+        "avatarUrl": "/avatars/bob.jpg"
+    },
+    {
+        "userId": 103,
+        "name": "Charlie Brown",
+        "username": "charlieb",
+        "role": "user",
+        "bio": "Foodie and travel addict.",
+        "avatarUrl": "/avatars/charlie.jpg"
+    },
+    {
+        "userId": 104,
+        "name": "Diana Prince",
+        "username": "dianap",
+        "role": "admin",
+        "bio": "Fitness coach and wellness advocate.",
+        "avatarUrl": "/avatars/diana.jpg"
+    }
+]
