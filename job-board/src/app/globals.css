@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+div.span.input.input-field {
+  @apply block text-gray-700 mt-1 bg-gray-100 p-2 rounded hover:bg-blue-200 hover:cursor-text hover:outline-blue-300;
+}
+
+input.input-field:empty::before {
+  content: "Not set";
+  @apply italic text-gray-400;
+}
+
+input.input-field:focus {
+  @apply outline-none ring-2 ring-blue-500;
+}
+
+span.input-title {
+  @apply font-bold text-gray-600;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

@@ -6,7 +6,7 @@ interface ProfileApplicationsProps {
 
 export default function ProfileApplications({ applications }: ProfileApplicationsProps) {
   return (
-    <div className="bg-white rounded shadow p-6">
+    <div className="bg-white rounded shadow p-6 outline-2 outline-gray-500 hover:outline-2 hover:outline-blue-500">
       <h3 className="text-lg font-semibold mb-4">Past Applications</h3>
       <ul className="space-y-3">
         {applications.map(app => (
