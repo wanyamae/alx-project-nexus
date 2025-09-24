@@ -39,3 +39,13 @@ export type JobApplication = {
     status: 'Applied' | 'Interviewing' | 'Offered' | 'Rejected';
     appliedAt: string; // ISO date string
 };
+
+export type Job = {
+	id: string;
+	title: string;
+	description: string;
+	company: string;
+	location: string;
+	logoUrl?: string;
+	jobUrl: string;
+}

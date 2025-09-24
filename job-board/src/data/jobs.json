@@ -1,0 +1,182 @@
+[
+  {
+    "id": "1",
+    "title": "Frontend Developer",
+    "description": "Build modern UIs with React and TypeScript.",
+    "company": "Google",
+    "location": "San Francisco",
+  "logoUrl": "https://logo.clearbit.com/google.com",
+  "jobUrl": "https://careers.google.com/jobs/frontend-developer"
+  },
+  {
+    "id": "2",
+    "title": "Backend Engineer",
+    "description": "Work on scalable backend systems using Node.js.",
+    "company": "Amazon",
+    "location": "Remote",
+  "logoUrl": "https://logo.clearbit.com/amazon.com",
+  "jobUrl": "https://amazon.jobs/backend-engineer"
+  },
+  {
+    "id": "3",
+    "title": "Product Manager",
+    "description": "Lead product teams and drive strategy.",
+    "company": "Meta",
+    "location": "New York",
+  "logoUrl": "https://logo.clearbit.com/meta.com",
+  "jobUrl": "https://meta.com/careers/product-manager"
+  },
+  {
+    "id": "4",
+    "title": "DevOps Engineer",
+    "description": "Automate infrastructure and CI/CD pipelines.",
+    "company": "Microsoft",
+    "location": "Seattle",
+  "logoUrl": "https://logo.clearbit.com/microsoft.com",
+  "jobUrl": "https://careers.microsoft.com/jobs/devops-engineer"
+  },
+  {
+    "id": "5",
+    "title": "Data Scientist",
+    "description": "Analyze data and build ML models.",
+    "company": "IBM",
+    "location": "Boston",
+  "logoUrl": "https://logo.clearbit.com/ibm.com",
+  "jobUrl": "https://ibm.com/careers/data-scientist"
+  },
+  {
+    "id": "6",
+    "title": "QA Tester",
+    "description": "Test software and ensure quality.",
+    "company": "Netflix",
+    "location": "Los Angeles",
+  "logoUrl": "https://logo.clearbit.com/netflix.com",
+  "jobUrl": "https://jobs.netflix.com/qa-tester"
+  },
+  {
+    "id": "7",
+    "title": "Mobile Developer",
+    "description": "Build mobile apps for iOS and Android.",
+    "company": "Apple",
+    "location": "Cupertino",
+  "logoUrl": "https://logo.clearbit.com/apple.com",
+  "jobUrl": "https://jobs.apple.com/mobile-developer"
+  },
+  {
+    "id": "8",
+    "title": "UI/UX Designer",
+    "description": "Design user interfaces and experiences.",
+    "company": "Adobe",
+    "location": "San Jose",
+  "logoUrl": "https://logo.clearbit.com/adobe.com",
+  "jobUrl": "https://adobe.com/careers/ui-ux-designer"
+  },
+  {
+    "id": "9",
+    "title": "Cloud Architect",
+    "description": "Design cloud solutions and architecture.",
+    "company": "Oracle",
+    "location": "Austin",
+  "logoUrl": "https://logo.clearbit.com/oracle.com",
+  "jobUrl": "https://oracle.com/careers/cloud-architect"
+  },
+  {
+    "id": "10",
+    "title": "Security Analyst",
+    "description": "Monitor and secure IT systems.",
+    "company": "Cisco",
+    "location": "San Jose",
+  "logoUrl": "https://logo.clearbit.com/cisco.com",
+  "jobUrl": "https://jobs.cisco.com/security-analyst"
+  },
+  {
+    "id": "11",
+    "title": "Full Stack Developer",
+    "description": "Develop both frontend and backend systems.",
+    "company": "Twitter",
+    "location": "San Francisco",
+  "logoUrl": "https://logo.clearbit.com/twitter.com",
+  "jobUrl": "https://twitter.com/careers/full-stack-developer"
+  },
+  {
+    "id": "12",
+    "title": "AI Engineer",
+    "description": "Build and deploy AI solutions.",
+    "company": "OpenAI",
+    "location": "Remote",
+  "logoUrl": "https://logo.clearbit.com/openai.com",
+  "jobUrl": "https://openai.com/careers/ai-engineer"
+  },
+  {
+    "id": "13",
+    "title": "Systems Administrator",
+    "description": "Manage servers and IT infrastructure.",
+    "company": "Dell",
+    "location": "Round Rock",
+  "logoUrl": "https://logo.clearbit.com/dell.com",
+  "jobUrl": "https://jobs.dell.com/systems-administrator"
+  },
+  {
+    "id": "14",
+    "title": "Network Engineer",
+    "description": "Design and maintain network systems.",
+    "company": "AT&T",
+    "location": "Dallas",
+  "logoUrl": "https://logo.clearbit.com/att.com",
+  "jobUrl": "https://att.jobs/network-engineer"
+  },
+  {
+    "id": "15",
+    "title": "Business Analyst",
+    "description": "Analyze business processes and requirements.",
+    "company": "Accenture",
+    "location": "Chicago",
+  "logoUrl": "https://logo.clearbit.com/accenture.com",
+  "jobUrl": "https://accenture.com/careers/business-analyst"
+  },
+  {
+    "id": "16",
+    "title": "Technical Writer",
+    "description": "Create technical documentation.",
+    "company": "Salesforce",
+    "location": "San Francisco",
+  "logoUrl": "https://logo.clearbit.com/salesforce.com",
+  "jobUrl": "https://salesforce.com/careers/technical-writer"
+  },
+  {
+    "id": "17",
+    "title": "IT Support Specialist",
+    "description": "Provide IT support and troubleshooting.",
+    "company": "HP",
+    "location": "Palo Alto",
+  "logoUrl": "https://logo.clearbit.com/hp.com",
+  "jobUrl": "https://jobs.hp.com/it-support-specialist"
+  },
+  {
+    "id": "18",
+    "title": "Database Administrator",
+    "description": "Manage and optimize databases.",
+    "company": "SAP",
+    "location": "New York",
+  "logoUrl": "https://logo.clearbit.com/sap.com",
+  "jobUrl": "https://jobs.sap.com/database-administrator"
+  },
+  {
+    "id": "19",
+    "title": "Machine Learning Engineer",
+    "description": "Develop ML models and pipelines.",
+    "company": "Spotify",
+    "location": "Stockholm",
+  "logoUrl": "https://logo.clearbit.com/spotify.com",
+  "jobUrl": "https://spotify.com/careers/machine-learning-engineer"
+  },
+  {
+    "id": "20",
+    "title": "Game Developer",
+    "description": "Create and develop video games.",
+    "company": "Epic Games",
+    "location": "Cary",
+  "logoUrl": "https://logo.clearbit.com/epicgames.com",
+  "jobUrl": "https://epicgames.com/careers/game-developer"
+  }
+]
