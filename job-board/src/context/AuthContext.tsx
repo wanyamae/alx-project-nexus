@@ -1,6 +1,5 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import users from '../data/users.json';
 import type { User, AuthContextType } from '../interface';
 import Cookies from 'js-cookie';
 import bcrypt from 'bcryptjs';
@@ -19,14 +18,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const login = (username: string, password: string): boolean => {
-        const found = users.find(
-            (u) => u.username === username && bcrypt.compareSync(password, u.password)
-        );
-
-        if (found) {
-            setUser(found);
-            Cookies.set("user", JSON.stringify(found), { secure: true, sameSite: 'strict', expires: 0.3 }); 
+    const login = async (username: string, password: string): Promise<boolean> => {
+        const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+        if (data.user) {
+            setUser(data.user);
+            Cookies.set("user", JSON.stringify(data.user), { secure: true, sameSite: 'strict', expires: 0.3 });
             return true;
         }
         return false;

@@ -4,7 +4,6 @@ import React from "react";
 import { useAuth } from "../../context/AuthContext";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
-import profiles from "@/data/profiles.json";
 
 // Navigation links
 const navLinks = [
@@ -19,7 +18,15 @@ export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const profile = profiles.find((p) => p.userId === user?.userId);
+  type Profile = { name: string } | null;
+  const [profile, setProfile] = React.useState<Profile>(null);
+  React.useEffect(() => {
+    if (user?.userId) {
+      fetch(`/api/profile?userId=${user.userId}`)
+        .then(res => res.json())
+        .then((p) => setProfile(p));
+    }
+  }, [user]);
 
   // Map pathnames to page titles
   const pageTitles: Record<string, string> = {
@@ -114,7 +121,7 @@ export default function Header() {
 								{link.name}
 							</a>
 					</li>
-				))};
+				))}
 				<li>
 					<button
 						className="w-full bg-gray-200 text-gray-700 px-3 py-1.5 rounded hover:bg-gray-300 transition-colors font-semibold shadow-sm"

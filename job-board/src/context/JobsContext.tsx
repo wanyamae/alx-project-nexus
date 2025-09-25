@@ -1,6 +1,5 @@
 'use client'
 import React, { createContext, useContext, useState, useEffect,} from 'react';
-import jobsData from '@/data/jobs.json';
 import type { Job as JobType } from '@/interface';
 
 const JobsContext = createContext<{ jobs: JobType[]; loading: boolean } | null>(null);
@@ -11,14 +10,16 @@ export const JobsProvider = ({ children} : { children: React.ReactNode }) => {
 
     
 
-    useEffect(() => {
-        // Simulate API call with delay
-        setLoading(true);
-        setTimeout(() => {
-            setJobs(jobsData);
-            setLoading(false);
-        }, 800); // 800ms delay
-    }, []);
+            useEffect(() => {
+                    setLoading(true);
+                    fetch('/api/jobs')
+                        .then(res => res.json())
+                        .then((rows) => {
+                            setJobs(rows as JobType[]);
+                            setLoading(false);
+                        })
+                        .catch(() => setLoading(false));
+            }, []);
 
     return (
         <JobsContext.Provider value={{ jobs, loading }}>

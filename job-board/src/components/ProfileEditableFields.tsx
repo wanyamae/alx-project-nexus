@@ -13,13 +13,19 @@ export default function ProfileEditableFields({ profile }: ProfileEditableFields
     setSaving(true);
     setFeedback(null);
     setEditing(null);
-    // Simulate async save
     try {
-      await new Promise(res => setTimeout(res, 1200));
-      // Simulate random error (10% chance)
-      if (Math.random() < 0.1) throw new Error('Network error');
-      setFeedback({ type: 'success', message: 'Saved!' });
-      setDirty(false);
+      const res = await fetch('/api/profile/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values)
+      });
+      const data = await res.json();
+      if (data.success) {
+        setFeedback({ type: 'success', message: 'Saved!' });
+        setDirty(false);
+      } else {
+        setFeedback({ type: 'error', message: data.error || 'Error saving. Please try again.' });
+      }
     } catch (err) {
       setFeedback({ type: 'error', message: 'Error saving. Please try again.' });
     } finally {

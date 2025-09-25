@@ -3,8 +3,6 @@
 import React, { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
-import profiles from "@/data/profiles.json";
-import applications from "@/data/applications.json";
 import ProfileBasicInfo from "./ProfileBasicInfo";
 import ProfileEditableFields from "./ProfileEditableFields";
 import ProfileApplications from "./ProfileApplications";
@@ -12,12 +10,32 @@ import ProfileApplications from "./ProfileApplications";
 export default function Profile() {
     const { user, loading } = useAuth();
     const router = useRouter();
+    const [profile, setProfile] = React.useState<any | null>(null);
+    const [userApplications, setUserApplications] = React.useState<any[]>([]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (!loading && !user) {
             router.push("/login");
         }
     }, [user, loading, router]);
+
+    React.useEffect(() => {
+        if (user) {
+            fetch(`/api/profile?userId=${user.userId}`)
+                .then(res => res.json())
+                .then((p) => setProfile(p));
+            fetch(`/api/applications?userId=${user.userId}`)
+                .then(res => res.json())
+                .then((apps) => {
+                    setUserApplications(
+                        (apps as any[]).map(app => ({
+                            ...app,
+                            status: app.status as "Applied" | "Interviewing" | "Offered" | "Rejected"
+                        }))
+                    );
+                });
+        }
+    }, [user]);
 
     if (loading) {
         return (
@@ -33,19 +51,9 @@ export default function Profile() {
         return <div className="p-6">Redirecting to login...</div>;
     }
 
-    // Find the profile for the logged-in user
-    const profile = profiles.find((p) => p.userId === user.userId);
     if (!profile) {
         return <div className="p-6">Profile not found.</div>;
     }
-
-    // Filter applications for the logged-in user
-    const userApplications = applications
-        .filter((app) => app.applicantId === user.userId)
-        .map(app => ({
-            ...app,
-            status: app.status as "Applied" | "Interviewing" | "Offered" | "Rejected"
-        }));
 
     return (
         <div className="min-h-screen overflow-hidden h-full w-full bg-white/90 backdrop-blur-sm">

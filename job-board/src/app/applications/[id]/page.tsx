@@ -1,11 +1,19 @@
 import { notFound } from "next/navigation";
-import applications from "@/data/applications.json";
 import type { JobApplication } from "../../../interface";
 
-export default function ApplicationDetail({ params }: { params: { id: string } }) {
   const appId = Number(params.id);
-  const jobApplications = applications as JobApplication[];
-  const application = jobApplications.find(app => app.applicationId === appId);
+  const [application, setApplication] = React.useState<JobApplication | null>(null);
+  React.useEffect(() => {
+    fetch(`/api/applications?userId=&appId=${appId}`)
+      .then(res => res.json())
+      .then((apps) => {
+        if (Array.isArray(apps)) {
+          setApplication(apps.find((app: any) => app.applicationId === appId) || null);
+        } else {
+          setApplication(null);
+        }
+      });
+  }, [appId]);
 
   if (!application) return notFound();
 
