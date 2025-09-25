@@ -1,122 +1,134 @@
 'use client';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useJobs } from '../context/JobsContext';
-// import JobCard from '../components/JobCard';
+import { useAuth } from '../context/AuthContext';
+import { useRouter } from 'next/navigation';
+import JobCard from '../components/JobCard';
+import JobDetailsModal from '../components/JobDetailModal';
 import type { Job } from '@/interface';
 
 export default function HomePage() {
   const { jobs, loading } = useJobs() || { jobs: [], loading: true };
+  const { isAuthenticated, loading: authLoading } = useAuth();
+  const router = useRouter();
   const [search, setSearch] = useState('');
-  const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
+  const [recentlyViewed, setRecentlyViewed] = useState<Job[]>([]);
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const JOB_LIMIT = 100;
+  const [activeFilter, setActiveFilter] = useState<'all' | 'recent'>('all');
 
-  if (loading) return <div>Loading jobs...</div>;
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      router.replace('/login');
+    }
+  }, [isAuthenticated, authLoading, router]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('recentlyViewedJobs');
+    if (stored) setRecentlyViewed(JSON.parse(stored));
+  }, []);
+
+  if (loading || authLoading) return <div>Loading jobs...</div>;
 
   const jobsArray: Job[] = Array.isArray(jobs) ? jobs : [];
-  const filteredJobs = jobsArray.filter((job: Job) =>
+  let filteredJobs = jobsArray.filter((job: Job) =>
     job.title.toLowerCase().includes(search.toLowerCase()) ||
     job.company.toLowerCase().includes(search.toLowerCase()) ||
     job.location.toLowerCase().includes(search.toLowerCase())
   );
-  const selectedJob = jobsArray.find(job => job.id === selectedJobId) || null;
+  if (activeFilter === 'recent') {
+    filteredJobs = [...recentlyViewed];
+  }
+  filteredJobs = filteredJobs.slice(0, JOB_LIMIT);
+
+  // Add job to recently viewed
+  const handleViewJob = (job: Job) => {
+    setRecentlyViewed(prev => {
+      const filtered = prev.filter(j => j.id !== job.id);
+      const updated = [job, ...filtered].slice(0, 5);
+      localStorage.setItem('recentlyViewedJobs', JSON.stringify(updated));
+      return updated;
+    });
+    setSelectedJob(job);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedJob(null);
+  };
+
+  const handleSave = (job: Job) => {
+    // Implement save logic here (e.g., add to saved jobs)
+    alert(`Saved job: ${job.title}`);
+  };
+
+  const handleApply = (job: Job) => {
+    // Implement apply logic here (e.g., open application form)
+    alert(`Apply for job: ${job.title}`);
+  };
 
   return (
-    <div className="mt-20 md:mt-24 px-4 md:px-12 py-6 flex flex-col md:flex-row gap-6">
-      {/* Job List */}
-      <div className="w-full md:w-1/3 mb-6 md:mb-0">
+    <div className="mt-20 md:mt-24 px-4 md:px-12 py-6 flex flex-col lg:flex-row gap-8">
+      {/* Main job cards grid */}
+      <div className="flex-1">
         <input
           type="text"
           placeholder="Search jobs..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="mb-4 p-2 border rounded w-full"
+          className="mb-2 p-2 border rounded w-full"
         />
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-200 rounded-lg">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="py-2 px-4 text-left">Title</th>
-                <th className="py-2 px-4 text-left">Company</th>
-                <th className="py-2 px-4 text-left">Location</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredJobs.map((job: Job) => (
-                <React.Fragment key={job.id}>
-                  <tr
-                    className={`cursor-pointer hover:bg-blue-50 transition ${selectedJobId === job.id ? 'bg-blue-100' : ''}`}
-                    onClick={() => setSelectedJobId(job.id)}
-                  >
-                    <td className="py-2 px-4 font-semibold">{job.title}</td>
-                    <td className="py-2 px-4">{job.company}</td>
-                    <td className="py-2 px-4">{job.location}</td>
-                  </tr>
-                  {/* On small screens, show details below selected row */}
-                  <tr className="md:hidden">
-                    <td colSpan={3} className="p-0">
-                      {selectedJobId === job.id && (
-                        <div className="bg-white border border-gray-200 rounded-b-lg p-4 shadow">
-                          <div className="flex flex-col gap-4 items-start">
-                            <img src={job.logoUrl} alt={job.company + ' logo'} className="w-20 h-20 object-contain rounded mb-4" />
-                            <div>
-                              <div className="text-xl font-bold mb-2">{job.title}</div>
-                              <div className="mb-2 text-gray-700"><span className="font-semibold">Company:</span> {job.company}</div>
-                              <div className="mb-2 text-gray-700"><span className="font-semibold">Location:</span> {job.location}</div>
-                              <div className="mb-2 text-gray-700"><span className="font-semibold">Description:</span> {job.description}</div>
-                              <div className="mb-2 text-gray-700"><span className="font-semibold">ID:</span> {job.id}</div>
-                              <a
-                                href={job.jobUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition mt-2"
-                              >
-                                View Job Details
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
+        {/* Filter buttons */}
+        <div className="mb-4 flex gap-2">
+          <button
+            className={`px-3 py-1 rounded border text-sm font-medium transition-colors ${activeFilter === 'all' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-blue-50'}`}
+            onClick={() => setActiveFilter('all')}
+            aria-pressed={activeFilter === 'all'}
+          >
+            All
+          </button>
+          <button
+            className={`px-3 py-1 rounded border text-sm font-medium transition-colors ${activeFilter === 'recent' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-blue-50'}`}
+            onClick={() => setActiveFilter('recent')}
+            aria-pressed={activeFilter === 'recent'}
+          >
+            Recent
+          </button>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredJobs.map((job: Job) => (
+            <JobCard key={job.id} job={job} onViewDetails={handleViewJob} />
+          ))}
         </div>
       </div>
-
-      {/* On medium/large screens: right column for details */}
-      <div className="hidden md:block w-full md:w-1/2">
-        {selectedJobId ? (
-          (() => {
-            const job = jobsArray.find(j => j.id === selectedJobId);
-            if (!job) return null;
-            return (
-              <div className="bg-white border border-gray-200 rounded-lg p-6 shadow">
-                <div className="flex flex-col md:flex-row gap-4 items-start">
-                  <img src={job.logoUrl} alt={job.company + ' logo'} className="w-20 h-20 object-contain rounded mb-4 md:mb-0" />
-                  <div>
-                    <div className="text-2xl font-bold mb-2">{job.title}</div>
-                    <div className="mb-2 text-gray-700"><span className="font-semibold">Company:</span> {job.company}</div>
-                    <div className="mb-2 text-gray-700"><span className="font-semibold">Location:</span> {job.location}</div>
-                    <div className="mb-2 text-gray-700"><span className="font-semibold">Description:</span> {job.description}</div>
-                    <div className="mb-2 text-gray-700"><span className="font-semibold">ID:</span> {job.id}</div>
-                    <a
-                      href={job.jobUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition mt-2"
-                    >
-                      View Job Details
-                    </a>
-                  </div>
-                </div>
+      {/* Recently viewed sidebar */}
+      <aside className="w-full lg:w-72 mt-8 lg:mt-0">
+        <h3 className="font-bold text-lg mb-4">Recently Viewed</h3>
+        <ul className="space-y-3" aria-label="Recently viewed jobs">
+          {recentlyViewed.length === 0 && (
+            <li className="text-gray-400 text-sm">No jobs viewed yet.</li>
+          )}
+          {recentlyViewed.map(job => (
+            <li key={job.id} className="flex items-center gap-3 bg-gray-50 rounded p-2">
+              <img src={job.logoUrl} alt="" className="w-8 h-8 object-contain rounded" />
+              <div>
+                <div className="font-medium text-sm">{job.title}</div>
+                <div className="text-xs text-gray-500">{job.company}</div>
               </div>
-            );
-          })()
-        ) : (
-          <div className="text-gray-500 text-center mt-12">Select a job to view details</div>
-        )}
-      </div>
+            </li>
+          ))}
+        </ul>
+      </aside>
+      {/* Job Details Modal */}
+      <JobDetailsModal
+        job={selectedJob}
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        onSave={handleSave}
+        onApply={handleApply}
+      />
     </div>
   );
 }

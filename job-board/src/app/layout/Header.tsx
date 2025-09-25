@@ -4,11 +4,11 @@ import React from "react";
 import { useAuth } from "../../context/AuthContext";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import profiles from "@/data/profiles.json";
 
 // Navigation links
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Job Search", href: "/search" },
   { name: "Saved Jobs", href: "/my-jobs" },
   { name: "Profile", href: "/profile" },
 ]
@@ -19,16 +19,17 @@ export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const profile = profiles.find((p) => p.userId === user?.userId);
 
   // Map pathnames to page titles
   const pageTitles: Record<string, string> = {
     "/": "Home",
-    "/search": "Job Search",
+
     "/my-jobs": "Saved Jobs",
     "/profile": "Profile",
     "/login": "Login",
     "/applications": "Applications",
-  };
+  }
   // For dynamic routes like /applications/[id]
   let pageTitle = pageTitles[pathname] || "";
   if (!pageTitle && pathname.startsWith("/applications/")) {
@@ -76,10 +77,10 @@ export default function Header() {
           ) : (
             <>
               <span className="text-gray-700 font-medium">
-                {user?.username ?? ""}
+                {profile ? `Hello, ${profile.name}` : "Please log in"}
               </span>
               <button
-                className="bg-gray-200 text-gray-700 px-3 py-1.5 rounded hover:bg-gray-300 transition-colors font-semibold shadow-sm"
+                className="bg-gray-200 text-gray-700 px-3 py-1.5 rounded hover:bg-gray-300 transition-colors font-semibold shadow-sm hidden md:inline"
                 onClick={handleLogout}
               >
                 Logout

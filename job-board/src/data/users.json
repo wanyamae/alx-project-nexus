@@ -1,26 +1,26 @@
 [
-    { 
-        "userId": 101,
-        "username": "user",
-        "password": "user",
-        "role": "user"
-    },
-    {
-        "userId": 102,
-        "username": "admin",
-        "password": "!qaz",
-        "role": "admin"
-    },
-    {
-        "userId": 103,
-        "username": "guest",
-        "password": "guest",
-        "role": "guest"
-    },
-    {
-        "userId": 104,
-        "username": "superuser",
-        "password": "superuser",
-        "role": "superuser"
-    }
+  {
+    "userId": 101,
+    "username": "user",
+    "password": "$2b$08$lCE5hv/cwfa3ZAWGGZ5vPOdIFzc1o0.mi8vwanlKW8sc6g7DuSpca",
+    "role": "user"
+  },
+  {
+    "userId": 102,
+    "username": "admin",
+    "password": "$2b$08$RUa/iFm3DGiPWYd4POXAoO4DZReqWzca7famRxmVYaG7Dy3xxJYWe",
+    "role": "admin"
+  },
+  {
+    "userId": 103,
+    "username": "guest",
+    "password": "$2b$08$x7Jq0QTMCYtkRM8FgUk7xeb/ykaptW3HB.jO4/R11Q0TiU9WNpXaS",
+    "role": "guest"
+  },
+  {
+    "userId": 104,
+    "username": "superuser",
+    "password": "$2b$08$pKWYorw9Hcp2D09h3F4Ix.PetMIEfHp0Fc.SSRBCI5hCK.Ypw7/mO",
+    "role": "superuser"
+  }
 ]

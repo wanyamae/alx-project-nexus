@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 div.span.input.input-field {
-  @apply block text-gray-700 mt-1 bg-gray-100 p-2 rounded hover:bg-blue-200 hover:cursor-text hover:outline-blue-300;
+  @apply block text-gray-700 mt-1 bg-red-300 p-2 rounded hover:bg-blue-200 hover:cursor-text hover:outline-blue-300;
 }
 
 input.input-field:empty::before {
