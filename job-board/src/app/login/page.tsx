@@ -10,7 +10,7 @@ export default function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const [showRegister, setShowRegister] = useState(false);
+    const [showRegisterModal, setShowRegisterModal] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -27,9 +27,11 @@ export default function LoginPage() {
         }
     };
 
+    const handleClose = () => setShowRegisterModal(false);
+
     return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <RegisterModal open={showRegister} onClose={() => setShowRegister(false)} />
+        <RegisterModal open={showRegisterModal} onClose={handleClose} onSuccess={() => setShowRegisterModal(false)} />
         <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
             <div className="flex flex-col items-center mb-6">
                 {/* Replace with your logo or an SVG */}
@@ -67,8 +69,8 @@ export default function LoginPage() {
             </form>
             <div className="mt-6 text-center text-gray-500 text-xs flex flex-col gap-2">
                 <span>Forgot your password? Contact admin.</span>
-                <button className="text-blue-600 underline text-xs mt-2" onClick={() => setShowRegister(true)}>
-                  Don't have an account? Register
+                <button className="text-blue-600 underline text-xs mt-2" onClick={() => setShowRegisterModal(true)}>
+                  Don&#39;t have an account? Register
                 </button>
             </div>
         </div>

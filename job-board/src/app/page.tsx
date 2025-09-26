@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useJobs } from '../context/JobsContext';
 import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
+import { useToast } from '../context/ToastContext';
 import JobCard from '../components/JobCard';
 import JobDetailsModal from '../components/JobDetailModal';
 import type { Job } from '@/interface';
@@ -17,6 +18,7 @@ export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const JOB_LIMIT = 100;
   const [activeFilter, setActiveFilter] = useState<'all' | 'recent'>('all');
+  const { showToast } = useToast();
 
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
@@ -44,6 +46,7 @@ export default function HomePage() {
 
   // Add job to recently viewed
   const handleViewJob = (job: Job) => {
+    console.log('[DEBUG] handleViewJob called with:', job);
     setRecentlyViewed(prev => {
       const filtered = prev.filter(j => j.id !== job.id);
       const updated = [job, ...filtered].slice(0, 5);
@@ -52,6 +55,9 @@ export default function HomePage() {
     });
     setSelectedJob(job);
     setIsModalOpen(true);
+    setTimeout(() => {
+      console.log('[DEBUG] selectedJob:', job, 'isModalOpen:', true);
+    }, 0);
   };
 
   const handleCloseModal = () => {
@@ -60,15 +66,19 @@ export default function HomePage() {
   };
 
   const handleSave = (job: Job) => {
-    // Implement save logic here (e.g., add to saved jobs)
-    alert(`Saved job: ${job.title}`);
+    showToast(`Saved job: ${job.title}`, 'success');
   };
 
   const handleApply = (job: Job) => {
-    // Implement apply logic here (e.g., open application form)
-    alert(`Apply for job: ${job.title}`);
+    showToast(`Apply for job: ${job.title}`, 'info');
   };
 
+  const handleRecentlyViewedClick = (job) => {
+    setSelectedJob(job);
+    setIsModalOpen(true);
+  };
+
+  
   return (
     <div className="mt-20 md:mt-24 px-4 md:px-12 py-6 flex flex-col lg:flex-row gap-8">
       {/* Main job cards grid */}
@@ -111,7 +121,11 @@ export default function HomePage() {
             <li className="text-gray-400 text-sm">No jobs viewed yet.</li>
           )}
           {recentlyViewed.map(job => (
-            <li key={job.id} className="flex items-center gap-3 bg-gray-50 rounded p-2">
+            <li
+              key={job.id}
+              className="flex items-center gap-3 bg-gray-50 rounded p-2"
+              onClick={() => handleRecentlyViewedClick(job)}
+            >
               <img src={job.logoUrl} alt="" className="w-8 h-8 object-contain rounded" />
               <div>
                 <div className="font-medium text-sm">{job.title}</div>

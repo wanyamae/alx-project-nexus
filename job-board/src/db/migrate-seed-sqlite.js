@@ -49,15 +49,27 @@ function seedTable(table, columns, data) {
 
 
 db.serialize(() => {
-  seedTable('jobs', ['id','title','company','location','description','requirements','postedAt'], jobs);
+  seedTable('jobs', ['id','title','company','location','description','requirements','postedAt','logoUrl','jobUrl'], jobs);
   seedTable('users', ['userId','username','password','role'], users);
   seedTable('profiles', ['id','name','userId','email','bio','skills','experience'], profiles);
   seedTable('applications', ['id','userId','jobId','status','appliedAt'], applications);
 
-  // Seed random jobs
+  // Seed random jobs with logoUrl and jobUrl
   for (let i = 0; i < 5; i++) {
-    db.run(`INSERT INTO jobs (id, title, company, location, description, requirements, postedAt) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [`random${i}`, `Random Job ${i}`, `Company ${i}`, `Location ${i}`, `Description ${i}`, `Requirements ${i}`, new Date().toISOString()]);
+    db.run(
+      `INSERT INTO jobs (id, title, company, location, description, requirements, postedAt, logoUrl, jobUrl) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        `random${i}`,
+        `Random Job ${i}`,
+        `Company ${i}`,
+        `Location ${i}`,
+        `Description ${i}`,
+        `Requirements ${i}`,
+        new Date().toISOString(),
+        `https://logo.clearbit.com/random${i}.com`,
+        `https://random${i}.com/careers/job${i}`
+      ]
+    );
   }
 });
 

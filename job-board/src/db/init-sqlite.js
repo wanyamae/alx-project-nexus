@@ -17,7 +17,9 @@ const createTables = () => {
       location TEXT,
       description TEXT,
       requirements TEXT,
-      postedAt TEXT
+      postedAt TEXT,
+      logoUrl TEXT,
+      jobUrl TEXT
     )`);
 
     db.run(`CREATE TABLE IF NOT EXISTS users (
@@ -36,6 +38,7 @@ const createTables = () => {
       bio TEXT,
       skills TEXT,
       experience TEXT,
+
       FOREIGN KEY(userId) REFERENCES users(userId)
     )`);
 
@@ -46,6 +49,15 @@ const createTables = () => {
       status TEXT,
       appliedAt TEXT,
       FOREIGN KEY(userId) REFERENCES users(id),
+      FOREIGN KEY(jobId) REFERENCES jobs(id)
+    )`);
+
+    db.run(`CREATE TABLE IF NOT EXISTS saved_jobs (
+      userId TEXT NOT NULL,
+      jobId TEXT NOT NULL,
+      savedAt TEXT NOT NULL,
+      PRIMARY KEY (userId, jobId),
+      FOREIGN KEY(userId) REFERENCES users(userId),
       FOREIGN KEY(jobId) REFERENCES jobs(id)
     )`);
   });

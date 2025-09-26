@@ -2,7 +2,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { User, AuthContextType } from '../interface';
 import Cookies from 'js-cookie';
-import bcrypt from 'bcryptjs';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 

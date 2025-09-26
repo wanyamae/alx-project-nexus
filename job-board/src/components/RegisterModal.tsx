@@ -18,6 +18,7 @@ export default function RegisterModal({ open, onClose, onSuccess }: { open: bool
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -64,7 +65,7 @@ export default function RegisterModal({ open, onClose, onSuccess }: { open: bool
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 animate-fadein">
       <div className="bg-white rounded-3xl shadow-2xl p-0 w-full max-w-lg relative overflow-hidden border-2 border-pink-100">
         {floralBg}
-        <button className="absolute top-3 right-4 text-pink-300 hover:text-pink-600 z-10 text-3xl font-bold" onClick={onClose}>&times;</button>
+        <button className="absolute top-3 right-4 text-pink-300 hover:text-pink-600 z-10 text-3xl font-bold" onClick={() => setShowRegister(false)} aria-label="Close">&times;</button>
         <div className="relative z-10 p-8 flex flex-col items-center">
           <h2 className="text-3xl font-extrabold mb-1 text-pink-600 tracking-tight">Create Your Account</h2>
           <p className="mb-6 text-pink-400 text-base font-medium">Join our floral community and blossom your career journey!</p>
@@ -101,13 +102,23 @@ export default function RegisterModal({ open, onClose, onSuccess }: { open: bool
             </div>
             {error && <div className="text-red-600 text-sm font-semibold">{error}</div>}
             {success && <div className="text-green-600 text-sm font-semibold">Registration successful! 🌸</div>}
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-pink-400 to-pink-600 text-white py-2 rounded-lg font-bold shadow hover:from-pink-500 hover:to-pink-700 transition-colors text-lg tracking-wide"
-              disabled={loading}
-            >
-              {loading ? 'Registering...' : 'Register'}
-            </button>
+            <div className="flex gap-3 w-full">
+              <button
+                type="button"
+                className="w-1/3 bg-pink-100 text-pink-600 py-2 rounded-lg font-bold shadow hover:bg-pink-200 transition-colors text-base tracking-wide border border-pink-200"
+                onClick={onClose}
+                disabled={loading}
+              >
+                Close
+              </button>
+              <button
+                type="submit"
+                className="w-2/3 bg-gradient-to-r from-pink-400 to-pink-600 text-white py-2 rounded-lg font-bold shadow hover:from-pink-500 hover:to-pink-700 transition-colors text-lg tracking-wide"
+                disabled={loading}
+              >
+                {loading ? 'Registering...' : 'Register'}
+              </button>
+            </div>
           </form>
         </div>
       </div>

@@ -17,7 +17,10 @@ export async function POST(req: NextRequest) {
     const db = new sqlite3.Database(dbPath);
     db.run(
       `INSERT INTO users (username, password, role) VALUES (?, ?, ?)`,
-      [data.username, data.password, data.role || 'user'],
+      [
+        data.username,
+        data.password,
+        data.role || 'user'],
       function (err) {
         if (err) {
           db.close();

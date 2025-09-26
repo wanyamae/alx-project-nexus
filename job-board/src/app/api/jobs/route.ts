@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import sqlite3Init from 'sqlite3';
 import path from 'path';
 

@@ -1,14 +1,21 @@
+import React from "react";
 import { notFound } from "next/navigation";
 import type { JobApplication } from "../../../interface";
 
+type PageProps = {
+  params: { id: string }
+};
+
+const ApplicationPage = ({ params }: PageProps) => {
   const appId = Number(params.id);
   const [application, setApplication] = React.useState<JobApplication | null>(null);
+
   React.useEffect(() => {
     fetch(`/api/applications?userId=&appId=${appId}`)
       .then(res => res.json())
       .then((apps) => {
         if (Array.isArray(apps)) {
-          setApplication(apps.find((app: any) => app.applicationId === appId) || null);
+          setApplication(apps.find((app: JobApplication) => app.applicationId === appId) || null);
         } else {
           setApplication(null);
         }
@@ -25,4 +32,6 @@ import type { JobApplication } from "../../../interface";
       {/* Add more fields as needed */}
     </div>
   );
-}
+};
+
+export default ApplicationPage;

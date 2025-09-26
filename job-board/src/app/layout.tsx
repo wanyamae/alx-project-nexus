@@ -4,6 +4,7 @@ import "../app/globals.css";
 import Layout from "./layout/Layout";
 import { AuthProvider } from "../context/AuthContext";
 import { JobsProvider } from "../context/JobsContext";
+import { ToastProvider } from "../context/ToastContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,20 +28,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <main className="mx-auto max-w-8xl px-4 sm:px-8 py-6">
-          <AuthProvider>
-            <JobsProvider>
-              <Layout>
-                {children}
-              </Layout>
-            </JobsProvider>
-          </AuthProvider>
-          </main>
-        </body>
-
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <main className="mx-auto max-w-8xl px-4 sm:px-8 py-6">
+          <ToastProvider>
+            <AuthProvider>
+              <JobsProvider>
+                <Layout>
+                  {children}
+                </Layout>
+              </JobsProvider>
+            </AuthProvider>
+          </ToastProvider>
+        </main>
+      </body>
     </html>
   );
 }
