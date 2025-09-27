@@ -2,7 +2,7 @@ export async function searchJobs({
     company,
     location,
     page = 1,
-    page_size = 20
+    page_size = 20,
     queryObjects,
     sort_by = 'relevance'
 }: {

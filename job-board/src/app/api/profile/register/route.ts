@@ -6,14 +6,14 @@ import bcrypt from 'bcryptjs';
 const sqlite3 = sqlite3Init.verbose();
 const dbPath = path.join(process.cwd(), 'src/db/job-board.db');
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest): Promise<Response> {
   const data = await req.json();
   // Hash password if present
   if (data.password && !data.password.startsWith('$2b$')) {
     data.password = bcrypt.hashSync(data.password, 8);
   }
   // Insert user
-  return new Promise((resolve) => {
+  return await new Promise<Response>((resolve) => {
     const db = new sqlite3.Database(dbPath);
     db.run(
       `INSERT INTO users (username, password, role) VALUES (?, ?, ?)`,

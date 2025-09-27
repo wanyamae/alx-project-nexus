@@ -5,10 +5,10 @@ import path from 'path';
 const sqlite3 = sqlite3Init.verbose();
 const dbPath = path.join(process.cwd(), 'src/db/job-board.db');
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest): Promise<Response> {
   const data = await req.json();
   const { id, name, email, bio, skills, experience } = data;
-  return new Promise((resolve) => {
+  return await new Promise<Response>((resolve) => {
     const db = new sqlite3.Database(dbPath);
     db.run(
       `UPDATE profiles SET name = ?, email = ?, bio = ?, skills = ?, experience = ? WHERE id = ?`,
