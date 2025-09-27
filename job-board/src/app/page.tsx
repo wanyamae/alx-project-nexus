@@ -73,7 +73,11 @@ export default function HomePage() {
     showToast(`Apply for job: ${job.title}`, 'info');
   };
 
-  const handleRecentlyViewedClick = (job) => {
+  interface RecentlyViewedClickHandler {
+    (job: Job): void;
+  }
+
+  const handleRecentlyViewedClick: RecentlyViewedClickHandler = (job) => {
     setSelectedJob(job);
     setIsModalOpen(true);
   };

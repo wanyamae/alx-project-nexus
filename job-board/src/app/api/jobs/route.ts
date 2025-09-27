@@ -5,8 +5,8 @@ import path from 'path';
 const sqlite3 = sqlite3Init.verbose();
 const dbPath = path.join(process.cwd(), 'src/db/job-board.db');
 
-export async function GET() {
-  return new Promise((resolve) => {
+export async function GET(): Promise<Response> {
+  return await new Promise<Response>((resolve) => {
     const db = new sqlite3.Database(dbPath);
     db.all('SELECT * FROM jobs', (err, rows) => {
       db.close();

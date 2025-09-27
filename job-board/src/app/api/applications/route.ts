@@ -1,10 +1,10 @@
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest): Promise<Response> {
   const body = await req.json();
   const { userId, jobId, jobTitle, status = 'Applied' } = body;
   if (!userId || !jobId || !jobTitle) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
-  return new Promise((resolve) => {
+  return await new Promise<Response>((resolve) => {
     const db = new sqlite3.Database(dbPath);
     const appliedAt = new Date().toISOString();
     db.run(
@@ -28,12 +28,12 @@ import path from 'path';
 const sqlite3 = sqlite3Init.verbose();
 const dbPath = path.join(process.cwd(), 'src/db/job-board.db');
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest): Promise<Response> {
   const userId = req.nextUrl.searchParams.get('userId');
   if (!userId) {
     return NextResponse.json({ error: 'Missing userId' }, { status: 400 });
   }
-  return new Promise((resolve) => {
+  return await new Promise<Response>((resolve) => {
     const db = new sqlite3.Database(dbPath);
     db.all('SELECT * FROM applications WHERE userId = ?', [userId], (err, rows) => {
       db.close();

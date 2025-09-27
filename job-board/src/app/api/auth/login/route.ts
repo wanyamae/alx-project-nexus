@@ -7,9 +7,9 @@ import bcrypt from 'bcryptjs';
 const sqlite3 = sqlite3Init.verbose();
 const dbPath = path.join(process.cwd(), 'src/db/job-board.db');
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest): Promise<Response> {
   const { username, password } = await req.json();
-  return new Promise((resolve) => {
+  return await new Promise<Response>((resolve) => {
     const db = new sqlite3.Database(dbPath);
     db.get('SELECT * FROM users WHERE username = ?', [username], (err, userRaw) => {
       db.close();

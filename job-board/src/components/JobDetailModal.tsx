@@ -86,7 +86,7 @@ const JobDetailModal: React.FC<JobDetailsModalProps> = ({
       } else {
         showToast(data.error || 'Failed to apply.', 'error');
       }
-    } catch (e) {
+    } catch {
       showToast('Failed to apply.', 'error');
     }
   };

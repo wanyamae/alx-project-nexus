@@ -2,7 +2,6 @@
 
 import React, { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useJobs } from "../context/JobsContext";
 import { useRouter } from "next/navigation";
 import ProfileBasicInfo from "./ProfileBasicInfo";
 import ProfileEditableFields from "./ProfileEditableFields";
